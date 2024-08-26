@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# Solicitar as senhas e o ID da rede ZeroTier ao usuário
-echo "Digite a senha para o usuário haila: "
-read haila_senha
-
-echo "Digite a senha secreta para o usuário postgres no PostgreSQL: "
-read postgres_senha_secreta
-
-echo "Digite o ID da rede ZeroTier: "
-read zerotier_id
+# Solicitar as senhas e o ID da rede ZeroTier ao usuário usando /dev/tty
+haila_senha=$(read -sp "Digite a senha para o usuário haila: " </dev/tty && echo $REPLY)
+echo
+postgres_senha_secreta=$(read -sp "Digite a senha secreta para o usuário postgres no PostgreSQL: " </dev/tty && echo $REPLY)
+echo
+zerotier_id=$(read -p "Digite o ID da rede ZeroTier: " </dev/tty && echo $REPLY)
 
 # 1 - Criar um usuário root chamado haila
 sudo useradd -m -s /bin/bash haila
