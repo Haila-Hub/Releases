@@ -1,12 +1,19 @@
 #!/bin/bash
 
+# Solicitar as senhas e o ID da rede ZeroTier ao usuário
+read -sp "Digite a senha para o usuário haila: " haila_senha
+echo
+read -sp "Digite a senha secreta para o usuário postgres no PostgreSQL: " postgres_senha_secreta
+echo
+read -p "Digite o ID da rede ZeroTier: " zerotier_id
+
 # 1 - Criar um usuário root chamado haila
 sudo useradd -m -s /bin/bash haila
-echo "haila:minha_senha" | sudo chpasswd
+echo "haila:$haila_senha" | sudo chpasswd
 sudo usermod -aG sudo haila
 
 # 2 - Definir a senha para o usuário haila
-echo "haila:minha_senha" | sudo chpasswd
+echo "haila:$haila_senha" | sudo chpasswd
 
 # 3 - Instalar o PostgreSQL
 sudo apt-get update
@@ -38,7 +45,7 @@ EOL
 sudo systemctl restart postgresql
 
 # 5 - Mudar a senha do usuário postgres no PostgreSQL
-sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD 'minha_senha_secreta';"
+sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '$postgres_senha_secreta';"
 
 # 6 - Instalar o aplicativo ccze
 sudo apt-get install -y ccze
@@ -72,6 +79,23 @@ sudo systemctl start zerotier-one
 sudo systemctl enable zerotier-one
 
 # 13 - Ingressar na rede zerotier
-sudo zerotier-cli join id_da_rede_zerotier_one
+sudo zerotier-cli join $zerotier_id
+
+# 14 - Criar uma rede Wi-Fi hospedada usando Netplan
+cat <<EOL | sudo tee /etc/netplan/10-my-config.yaml
+network:
+  version: 2
+  renderer: networkd
+  wifis:
+    wlan0:
+      access-points:
+        "minhaRede":
+          password: "senha123"
+      dhcp4: yes
+      dhcp6: no
+EOL
+
+# Aplicar as configurações do Netplan
+sudo netplan apply
 
 echo "Instalação concluída com sucesso!"
