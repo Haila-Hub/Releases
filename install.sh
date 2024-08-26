@@ -1,11 +1,14 @@
 #!/bin/bash
 
 # Solicitar as senhas e o ID da rede ZeroTier ao usuário
-read -p "Digite a senha para o usuário haila: " haila_senha
-echo
-read -p "Digite a senha secreta para o usuário postgres no PostgreSQL: " postgres_senha_secreta
-echo
-read -p "Digite o ID da rede ZeroTier: " zerotier_id
+echo "Digite a senha para o usuário haila: "
+read haila_senha
+
+echo "Digite a senha secreta para o usuário postgres no PostgreSQL: "
+read postgres_senha_secreta
+
+echo "Digite o ID da rede ZeroTier: "
+read zerotier_id
 
 # 1 - Criar um usuário root chamado haila
 sudo useradd -m -s /bin/bash haila
@@ -85,6 +88,6 @@ sudo zerotier-cli join $zerotier_id
 sudo apt-get install -y network-manager
 
 # 15 - Criar o Wi-Fi hotspot usando nmcli
-sudo nmcli device wifi hotspot ifname wlan0 ssid minhaRede password senha123
+sudo nmcli device wifi hotspot ifname wlan0 ssid HAILA-BRIDGE password HailaBridge2024#
 
 echo "Instalação concluída com sucesso!"
