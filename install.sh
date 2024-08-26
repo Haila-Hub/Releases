@@ -89,8 +89,8 @@ network:
   wifis:
     wlan0:
       access-points:
-        "minhaRede":
-          password: "senha123"
+        "HAILA-BRIDGE":
+          password: "HAILA2024#"
       dhcp4: yes
       dhcp6: no
 EOL
