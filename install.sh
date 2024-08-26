@@ -51,7 +51,7 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '$postgres_senha_sec
 sudo apt-get install -y ccze
 
 # 7 - Fazer download do arquivo tar.xz da pasta haila-pi-bridge e descompactar em /home/haila
-wget -O /tmp/haila-pi-bridge.tar.xz https://exemplo.com/caminho/para/haila-pi-bridge.tar.xz
+wget -O /tmp/haila-pi-bridge.tar.xz https://raw.githubusercontent.com/Haila-Hub/Releases/main/haila-pi-bridge-001.tar.xz
 sudo tar -xvf /tmp/haila-pi-bridge.tar.xz -C /home/haila/
 sudo chown -R haila:haila /home/haila/haila-pi-bridge/
 
