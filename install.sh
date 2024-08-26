@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Solicitar as senhas e o ID da rede ZeroTier ao usuário
-read -sp "Digite a senha para o usuário haila: " haila_senha
+read -p "Digite a senha para o usuário haila: " haila_senha
 echo
-read -sp "Digite a senha secreta para o usuário postgres no PostgreSQL: " postgres_senha_secreta
+read -p "Digite a senha secreta para o usuário postgres no PostgreSQL: " postgres_senha_secreta
 echo
 read -p "Digite o ID da rede ZeroTier: " zerotier_id
 
@@ -51,7 +51,7 @@ sudo -u postgres psql -c "ALTER USER postgres WITH PASSWORD '$postgres_senha_sec
 sudo apt-get install -y ccze
 
 # 7 - Fazer download do arquivo tar.xz da pasta haila-pi-bridge e descompactar em /home/haila
-wget -O /tmp/haila-pi-bridge.tar.xz https://raw.githubusercontent.com/Haila-Hub/Releases/main/haila-pi-bridge-001.tar.xz
+wget -O /tmp/haila-pi-bridge.tar.xz https://exemplo.com/caminho/para/haila-pi-bridge.tar.xz
 sudo tar -xvf /tmp/haila-pi-bridge.tar.xz -C /home/haila/
 sudo chown -R haila:haila /home/haila/haila-pi-bridge/
 
@@ -81,21 +81,10 @@ sudo systemctl enable zerotier-one
 # 13 - Ingressar na rede zerotier
 sudo zerotier-cli join $zerotier_id
 
-# 14 - Criar uma rede Wi-Fi hospedada usando Netplan
-cat <<EOL | sudo tee /etc/netplan/10-my-config.yaml
-network:
-  version: 2
-  renderer: networkd
-  wifis:
-    wlan0:
-      access-points:
-        "HAILA-BRIDGE":
-          password: "HAILA2024#"
-      dhcp4: yes
-      dhcp6: no
-EOL
+# 14 - Instalar o network-manager
+sudo apt-get install -y network-manager
 
-# Aplicar as configurações do Netplan
-sudo netplan apply
+# 15 - Criar o Wi-Fi hotspot usando nmcli
+sudo nmcli device wifi hotspot ifname wlan0 ssid minhaRede password senha123
 
 echo "Instalação concluída com sucesso!"
