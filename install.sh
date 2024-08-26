@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # Solicitar as senhas e o ID da rede ZeroTier ao usuário usando /dev/tty
-haila_senha=$(read -sp "Digite a senha para o usuário haila: " </dev/tty && echo $REPLY)
+haila_senha=$(read -p "Digite a senha para o usuário haila: " </dev/tty && echo $REPLY)
 echo
-postgres_senha_secreta=$(read -sp "Digite a senha secreta para o usuário postgres no PostgreSQL: " </dev/tty && echo $REPLY)
+postgres_senha_secreta=$(read -p "Digite a senha secreta para o usuário postgres no PostgreSQL: " </dev/tty && echo $REPLY)
 echo
 zerotier_id=$(read -p "Digite o ID da rede ZeroTier: " </dev/tty && echo $REPLY)
 
