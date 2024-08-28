@@ -84,7 +84,30 @@ sudo zerotier-cli join $zerotier_id
 # 14 - Instalar o network-manager
 sudo apt-get install -y network-manager
 
-# 15 - Criar o Wi-Fi hotspot usando nmcli
-sudo nmcli device wifi hotspot ifname wlan0 ssid HAILA-BRIDGE password HailaBridge2024#
+# 15 - Identificar o dispositivo Wi-Fi
+wifi_interface=$(nmcli device status | grep wifi | grep -i connected | awk '{print $1}' | head -n 1)
 
+if [ -z "$wifi_interface" ]; then
+  wifi_interface=$(nmcli device status | grep wifi | grep -i unavailable | awk '{print $1}' | head -n 1)
+fi
+
+if [ -z "$wifi_interface" ]; then
+  echo "Nenhum dispositivo Wi-Fi disponível foi encontrado."
+  exit 1
+fi
+
+# 16 - Criar o Wi-Fi hotspot usando a interface identificada
+
+# Executa o comando e captura o ID do ZeroTier
+zerotier_id=$(sudo zerotier-cli info | awk '{print $3}')
+
+sudo nmcli device wifi hotspot ifname $wifi_interface ssid HAILA-BRIDGE-$zerotier_id password HailaBridge2024#
+
+echo
 echo "Instalação concluída com sucesso!"
+echo
+echo "Dados da rede Wifi: "
+echo "---------------------------------------"
+echo " SSID: HAILA-BRIDGE-$zerotier_id"
+echo " PASS: HailaBridge2024#"
+echo "---------------------------------------"
