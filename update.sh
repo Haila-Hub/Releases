@@ -20,7 +20,9 @@ sudo chmod +x /home/haila/haila-pi-bridge/workers/workers
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/compress-image
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/ISAPISendFace
 
+sudo systemctl restart haila-pi-bridge && sudo systemctl restart haila-pi-bridge-health
+
 echo
-echo "Brideg atualizado com sucesso!"
+echo "Bride atualizado com sucesso!"
 echo
-echo "Reinicie o Ubuntu para aplicar as atualizaçcões!"
+
