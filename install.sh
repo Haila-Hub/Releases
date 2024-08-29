@@ -103,6 +103,9 @@ zerotier_id=$(sudo zerotier-cli info | awk '{print $3}')
 
 sudo nmcli device wifi hotspot ifname $wifi_interface ssid HAILA-BRIDGE-$zerotier_id password HailaBridge2024#
 
+# 17 - Executar o arquivo SQL para inicializar o banco de dados
+sudo -u postgres psql -f /home/haila/haila-pi-bridge/haila-bridge/init_db.sql
+
 echo
 echo "Instalação concluída com sucesso!"
 echo
