@@ -18,7 +18,7 @@ sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/start_health.sh
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/haila-bridge
 sudo chmod +x /home/haila/haila-pi-bridge/workers/workers
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/compress-image
-sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/ISAPISendFace
+sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/ISAPIAddFace
 
 sudo systemctl restart haila-pi-bridge && sudo systemctl restart haila-pi-bridge-health
 
