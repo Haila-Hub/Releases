@@ -94,6 +94,8 @@ sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/haila-bridge
 
 sudo chmod +x /home/haila/haila-pi-bridge/workers/workers
 
+sudo chmod +x /home/haila/bridge_cli
+
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/compress-image
 
 sudo chmod +x /home/haila/haila-pi-bridge/haila-bridge/dist/services/hikvision/ISAPISendFace
